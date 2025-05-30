@@ -7,7 +7,7 @@ yes = { #diz is the priority of each operators
     '*': 7, '/': 7, '%': 7,
     '^': 8
 } 
-def is_operator(token):
+def is_operator(token): #so basically chinecheck nya lang if yung operator is nasa dictionary which is yung "yes" dict
     return token in yes
 def apply_operator(op, a, b=None):
     try:
@@ -28,9 +28,9 @@ def apply_operator(op, a, b=None):
         elif op == '!': return int(not a)
     except Exception as e:
         raise ValueError(f"Invalid operation: {op} {a} {b}")
-def tokenize(expr):
-    tokens = []
-    num = ""
+def tokenize(expr): #eto naman ginagawa nyang token yung each character in an expression
+    tokens = []    #for example, 2+(2*2), magiging ['2','+','(','2','+','2',')'] sya, tas ma iistore sya dun sa tokens = []
+    num = ""        #also may if block dito na chinecheck kung may double operator ba na tinype na intended, for example '&&' mag iiskip yan para hindi maging ['&','&']
     i = 0
     while i < len(expr):
         if expr[i].isdigit():
