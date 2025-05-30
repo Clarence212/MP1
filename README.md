@@ -20,7 +20,7 @@ This is a stack-based calculator built with Python that converts and evaluates i
 
 ---
 
-## Sample Code: Infix to Postfix Conversion
+## Peek: Infix to Postfix Conversion
 
 ```python
 def infix_to_postfix(expr):
