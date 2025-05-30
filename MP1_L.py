@@ -29,17 +29,17 @@ def apply_operator(op, a, b=None):
     except Exception as e:
         raise ValueError(f"Invalid operation: {op} {a} {b}")
 def tokenize(expr): #eto naman ginagawa nyang token yung each character in an expression
-    tokens = []    #for example, 2+(2*2), magiging ['2','+','(','2','+','2',')'] sya, tas ma iistore sya dun sa tokens = []
-    num = ""        #also may if block dito na chinecheck kung may double operator ba na tinype na intended, for example '&&' mag iiskip yan para hindi maging ['&','&']
-    i = 0
-    while i < len(expr):
-        if expr[i].isdigit():
+    tokens = []     #for example, 2+(2*2), magiging ['2','+','(','2','+','2',')'] sya, tas ma iistore sya dun sa tokens = []
+    num = ""       #yung num naman na ito is para sa multi digit dumbers so if 123 magiging "123" not '1','2','3' 
+    i = 0 #yung index when nag iiscan sya thru the token like tinitingnan nya kung anong current character ung iniiscan
+    while i < len(expr): #tas eto naman yung loop na nag ruruun from left to right char by char
+        if expr[i].isdigit(): #base don sa scanner pag na scan nya yung character as digit ilalagay nya sa loob ng "" ex. num = "123"
             num += expr[i]
-        else:
+        else:           # so eto naman is pag hindi na digit yung nababasa nya meaning tapos na yung current number at mag aappend na to sa  tokens = [] at mag rereset na ulet for the next one
             if num:
                 tokens.append(num)
                 num = ""
-            if expr[i:i+2] in yes:
+            if expr[i:i+2] in yes: #dito naman ay chinecheck kung may two character operator ba na tinype na intended like ==,<=, for example '&&' mag iiskip yan para hindi maging ['&','&']
                 tokens.append(expr[i:i+2])
                 i += 1
             elif expr[i] in yes or expr[i] in '()':
@@ -126,8 +126,8 @@ def calculate():
         result_label.config(text="Nothing entered")
         return
     try:
-        if len(expr) > 360:
-            raise ValueError("Expression exceeds 360 characters, plz reduce expression")
+        if len(expr) > 256:
+            raise ValueError("Expression exceeds 256 characters, plz reduce expression")
         postfix = infix_to_postfix(expr)
         postfix_label.config(text="Postfix: " + ' '.join(postfix))
         result = evaluate_postfix(postfix)
