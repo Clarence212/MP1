@@ -59,7 +59,7 @@ def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix
             output.append(token) #if yung na loop nya na token is digit, is idadagdag nya yan sa output list. Mauuna muna yung numbers b4 yung operators
         elif token == '(': #pag left parenthesis mag pupush yan sa stack, lahat ng operators after nito ma eevaluate seperately before the closing parenthesis
             stack.append(token)
-        elif token == ')':
+        elif token == ')': #pag right parenthesis naman po ipopop nya na yung operators from the stack tas i aadd na yun sa output hanggang mahanap yung closing
             found_paren = False
             while stack:
                 top = stack.pop()
@@ -68,9 +68,9 @@ def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix
                     break
                 output.append(top)
             if not found_paren:
-                raise ValueError("unclosedparentheses")
-        elif is_operator(token):
-            while (stack and stack[-1] != '(' and
+                raise ValueError("unclosedparentheses") #if hindi na close yung parenthesis mag raraise yan ng error
+        elif is_operator(token):   #
+            while (stack and stack[-1] != '(' and 
                    yes[token] <= yes.get(stack[-1], 0)):
                 output.append(stack.pop())
             stack.append(token)
