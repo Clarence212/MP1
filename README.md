@@ -3,7 +3,7 @@
 This is a stack-based calculator built with Python that converts and evaluates infix expressions by turning them into postfix (Reverse Polish Notation). It features a GUI made with `tkinter` and handles various operators with custom error handling.
 
  **Note:** This was my project in **National University Fairview**.
-  BEST PROF BTW
+  Shout out to my prof ur da best
 ---
 
 ## Features
