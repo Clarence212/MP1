@@ -7,7 +7,7 @@ yes = { #diz is the priority of each operators
     '*': 7, '/': 7, '%': 7,
     '^': 8
 } 
-def is_operator(token): #so basically chinecheck nya lang if yung operator is nasa dictionary which is yung "yes" dictt
+def is_operator(token): #so basically chinecheck nya lang if yung operator is nasa dictionary which is yung "yes" dict
     return token in yes
 def apply_operator(op, a, b=None):
     try:
