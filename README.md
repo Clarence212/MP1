@@ -8,15 +8,15 @@ This is a stack-based calculator built with Python that converts and evaluates i
 
 ## Features
 
-- ✅ Supports multi-digit integers
-- ✅ Handles parentheses
-- ✅ Supports the following operators:
+- Supports multi-digit integers
+- Handles parentheses
+- Supports the following operators:
   - Arithmetic: `+`, `-`, `*`, `/`, `%`, `^`
   - Comparison: `<`, `>`, `<=`, `>=`, `==`, `!=`
   - Logical: `&&`, `||`, `!`
-- ✅ Custom error messages (e.g., unclosed parentheses, divide by zero)
-- ✅ Input length limit (256 characters)
-- ✅ Clean and interactive GUI with `tkinter`
+- Custom error messages (e.g., unclosed parentheses, divide by zero)
+- Input length limit (256 characters)
+- Clean and interactive GUI with `tkinter`
 
 ---
 
