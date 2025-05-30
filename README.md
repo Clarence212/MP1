@@ -1,12 +1,12 @@
-# 🧮 Infix to Postfix Calculator (Stack-Based)
+#  Infix to Postfix Calculator (Stack-Based)
 
 This is a stack-based calculator built with Python that converts and evaluates infix expressions by turning them into postfix (Reverse Polish Notation). It features a GUI made with `tkinter` and handles various operators with custom error handling.
 
-📌 **Note:** This was my project in **National University Fairview**.
+ **Note:** This was my project in **National University Fairview**.
 
 ---
 
-## 🚀 Features
+## Features
 
 - ✅ Supports multi-digit integers
 - ✅ Handles parentheses
@@ -20,7 +20,7 @@ This is a stack-based calculator built with Python that converts and evaluates i
 
 ---
 
-## 🧠 Sample Code: Infix to Postfix Conversion
+## Sample Code: Infix to Postfix Conversion
 
 ```python
 def infix_to_postfix(expr):
