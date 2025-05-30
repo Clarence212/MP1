@@ -52,7 +52,7 @@ def tokenize(expr): #eto naman ginagawa nyang token yung each character in an ex
     return tokens #return na yung whole token list ready na for the next step>>
 
 def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix to postfix
-    output, stack = [], [] #dito ihohold yung postfix result
+    output, stack = [], [] #dito ihohold yung postfix result / Stack is para sa operators
     tokens = tokenize(expr) #eto na yung tokens na nabreakdown into manageable pieces
     for token in tokens: #mag loloop ito sa each tokens sa infix expression
         if token.isdigit():
@@ -69,16 +69,17 @@ def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix
                 output.append(top)
             if not found_paren:
                 raise ValueError("unclosedparentheses") #if hindi na close yung parenthesis mag raraise yan ng error
-        elif is_operator(token):   #
+        elif is_operator(token):   #so eto naman uhh mag rurunn sya if yung current token is an operator, also naka depende kung anong priority(precedence) nung operator
             while (stack and stack[-1] != '(' and 
                    yes[token] <= yes.get(stack[-1], 0)):
-                output.append(stack.pop())
+                output.append(stack.pop()) #pinopop nya from stack to output
             stack.append(token)
-    while stack:
+    while stack: #final cleanupp nagchecheck lang if may laman pa yung stack pag parenthesis yung natira mag raraise yan ng error pag hindi naman parenthesis pop lang papuntang output :)
         if stack[-1] in '()':
             raise ValueError("unclosed parentheses")
         output.append(stack.pop())
-    return output
+    return output #all donee irereturn na yung fully converted na infix to postfix expression
+
 def evaluate_postfix(postfix):
     stack = []
     for token in postfix:
