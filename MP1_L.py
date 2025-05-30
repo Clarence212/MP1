@@ -42,22 +42,22 @@ def tokenize(expr): #eto naman ginagawa nyang token yung each character in an ex
             if expr[i:i+2] in yes: #dito naman ay chinecheck kung may two character operator ba na tinype na intended like ==,<=, for example '&&' mag iiskip yan para hindi maging ['&','&']
                 tokens.append(expr[i:i+2])
                 i += 1
-            elif expr[i] in yes or expr[i] in '()':
+            elif expr[i] in yes or expr[i] in '()': #so if hindi naman double character operator, like * or parenthesis lang sya check mo parin and append mo din sa tokens
                 tokens.append(expr[i])
-            elif not expr[i].isspace():
+            elif not expr[i].isspace():         #so pag hindi digit or hindi operator or space, mag eerror yann
                 raise ValueError(f"Invalid character: {expr[i]}")
-        i += 1
-    if num:
+        i += 1    #pang moveforward lang ng loop hahaha
+    if num: #pagnatapos na yung loop baka may laman pa yung num, add na kaagad yan sa tokens
         tokens.append(num)
-    return tokens
+    return tokens #return na yung whole token list ready na for the next step>>
 
-def infix_to_postfix(expr):
-    output, stack = [], []
-    tokens = tokenize(expr)
-    for token in tokens:
+def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix to postfix
+    output, stack = [], [] #dito ihohold yung postfix result
+    tokens = tokenize(expr) #eto na yung tokens na nabreakdown into manageable pieces
+    for token in tokens: #mag loloop ito sa each tokens sa infix expression
         if token.isdigit():
-            output.append(token)
-        elif token == '(':
+            output.append(token) #if yung na loop nya na token is digit, is idadagdag nya yan sa output list. Mauuna muna yung numbers b4 yung operators
+        elif token == '(': #pag left parenthesis mag pupush yan sa stack, lahat ng operators after nito ma eevaluate seperately before the closing parenthesis
             stack.append(token)
         elif token == ')':
             found_paren = False
