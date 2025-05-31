@@ -137,5 +137,5 @@ def calculate(): #this where the magic starts
     except Exception as e: #mag didisplay sya ng error sa gui pag may ano mang mali sa ginawa ng user para hindi quit bigla, dat may feedback
         postfix_label.config(text="Postfix: Error")
         result_label.config(text=f"Error: {e}")
-
+root.bind('<Return>', lambda event: calculate())
 root.mainloop() #nagrurun sa gui para nakaopen lang sya habang ginagamit
