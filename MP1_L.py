@@ -9,25 +9,26 @@ yes = { #diz is the priority of each operators
 } 
 def is_operator(token): #so basically chinecheck nya lang if yung operator is nasa dictionary which is yung "yes" dict
     return token in yes
-def apply_operator(op, a, b=None):
-    try:
+def apply_operator(op, a, b=None): #function na tumatanggap ng specific operators, a yung first operand and b yung second para hiwalay ung logic ng application, masmalinis
+    try: #basta para di magcrash if my error kasi may error msg
         if op == '+': return a + b
         elif op == '-': return a - b
         elif op == '*': return a * b
         elif op == '/': return a // b if b != 0 else (_ for _ in ()).throw(ValueError("error: can't divide by 0")) 
         elif op == '%': return a % b
         elif op == '^': return a ** b
-        elif op == '>': return int(a > b)
+        elif op == '>': return int(a > b) #eto yung mga comparison op ginawa kong int para maging 0 if false and 1 if true
         elif op == '<': return int(a < b)
         elif op == '>=': return int(a >= b)
         elif op == '<=': return int(a <= b)
         elif op == '==': return int(a == b)
         elif op == '!=': return int(a != b)
-        elif op == '&&': return int(a and b)
+        elif op == '&&': return int(a and b)#eto mga logical operators
         elif op == '||': return int(a or b)
-        elif op == '!': return int(not a)
-    except Exception as e:
+        elif op == '!': return int(not a)#pang negate lang
+    except Exception as e: #Kapag may error sa kahit anong operation sa taas mag tothrow ng clear detailed na error, masmaganda para pag may mali alam kaagad ng user kung anong nagawa nyang mali
         raise ValueError(f"Invalid operation: {op} {a} {b}")
+    
 def tokenize(expr): #eto naman ginagawa nyang token yung each character in an expression
     tokens = []     #for example, 2+(2*2), magiging ['2','+','(','2','+','2',')'] sya, tas ma iistore sya dun sa tokens = []
     num = ""       #yung num naman na ito is para sa multi digit dumbers so if 123 magiging "123" not '1','2','3' 
@@ -120,21 +121,21 @@ postfix_label = tk.Label(root, text="Postfix:", font=label_font, bg="#f0f4f8", f
 postfix_label.pack(pady=5)
 result_label = tk.Label(root, text="Result:", font=label_font, bg="#43d14f", fg="#000", relief="groove", padx=10, pady=5, width=60, anchor="center")
 result_label.pack(pady=10)
-def calculate():
-    expr = entry.get().strip()
-    if not expr:
+def calculate(): #this where the magic starts
+    expr = entry.get().strip() #eto yung kukuha ng input galnig don sa entry field sa gui, yung .strip yung mag aalis ng extra spaces sa start or sa dulo para malinis bago i process
+    if not expr: #dito naman is pag walang nilagay sa entry field tapos clinick yung evaluate, mag lalabas lang ng message like "nothing entered" 
         postfix_label.config(text="Postfix: ")
         result_label.config(text="Nothing entered")
         return
-    try:
-        if len(expr) > 256:
+    try: #gumamit ako ng try para i catch ung mga errors habang nagcacalculate para na rin hindi mag crash pag mali yung output
+        if len(expr) > 256: #pang limit lang to para din sa performance, kase sino ba namang maglalagay ng napakabanag expression diba
             raise ValueError("Expression exceeds 256 characters, plz reduce expression")
-        postfix = infix_to_postfix(expr)
-        postfix_label.config(text="Postfix: " + ' '.join(postfix))
-        result = evaluate_postfix(postfix)
-        result_label.config(text="Result: " + str(result))
-    except Exception as e:
+        postfix = infix_to_postfix(expr) #convert muna natin yung infix to postfix kase masmadali i convert yung postfix sa stacks
+        postfix_label.config(text="Postfix: " + ' '.join(postfix)) #tas ididisplay dito postfix form
+        result = evaluate_postfix(postfix) #once we have na yung postfix ieevaluate na yan using ung evaluate_postfix()
+        result_label.config(text="Result: " + str(result))#yung mismong result nung postfix evaluation
+    except Exception as e: #mag didisplay sya ng error sa gui pag may ano mang mali sa ginawa ng user para hindi quit bigla, dat may feedback
         postfix_label.config(text="Postfix: Error")
         result_label.config(text=f"Error: {e}")
 
-root.mainloop()
+root.mainloop() #nagrurun sa gui para nakaopen lang sya habang ginagamit
