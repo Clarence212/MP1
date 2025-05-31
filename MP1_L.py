@@ -80,24 +80,24 @@ def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix
         output.append(stack.pop())
     return output #all donee irereturn na yung fully converted na infix to postfix expression
 
-def evaluate_postfix(postfix): #so dito mag dedefine tayo ng function na mag eevaluate ng postfix expression
-    stack = []
-    for token in postfix:
-        if token.isdigit():
-            stack.append(int(token))
-        elif token == '!':
+def evaluate_postfix(postfix):  #so dito mag dedefine tayo ng function na nageevalutate ng postfix expression
+    stack = [] #empty stack ulet for for storing sa items while nag eevaluate
+    for token in postfix: #mag loloop sya
+        if token.isdigit(): #if yung nadaanan nya na character is digit mag pupush yan sa stack ready na ma evaluate until may operator na madaanan yung loop
+            stack.append(int(token)) #convert to int tapos mag push sya sa stack
+        elif token == '!': #so eto naman para to sa logical operator na !, isang operand lang kasi need neto atleast 1, otherwise error sya
             if not stack:
-                raise ValueError("missing operand for '!'")
+                raise ValueError("missing operand for !")
             a = stack.pop()
             stack.append(apply_operator(token, a))
-        else:
+        else:  #eto naman chinecheck nya if sapat na yung operand para sa current operator like +,+,/, kasi ito need atleast 2 operands unlike ! na isa lang sapat na
             if len(stack) < 2:
-                raise ValueError(f"not enough operands for '{token}'")
-            b = stack.pop()
-            a = stack.pop()
-            stack.append(apply_operator(token, a, b))
-    if len(stack) != 1:
-        raise ValueError("Invalid expression")
+                raise ValueError(f"not enough operands for '{token}'") #error if kulang yung operand
+            b = stack.pop() #una i push si b sa top
+            a = stack.pop()# then si a second top
+            stack.append(apply_operator(token, a, b)) #push pabalik sa stack
+    if len(stack) != 1: #after nung loop dapat isa lang matitira sa stack which is yung final answer pag wala or sobra mag eeror sha
+        raise ValueError("Invalid expression") #error handler nya
     return stack[0]
 
 
