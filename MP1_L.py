@@ -80,7 +80,7 @@ def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix
         output.append(stack.pop())
     return output #all donee irereturn na yung fully converted na infix to postfix expression
 
-def evaluate_postfix(postfix):
+def evaluate_postfix(postfix): #so dito mag dedefine tayo ng function na mag eevaluate ng postfix expression
     stack = []
     for token in postfix:
         if token.isdigit():
