@@ -169,39 +169,45 @@ def traverse_display():
 
 def display_node_table():
     canvas.delete("all")  # Clear canvas
-    if not root_node:
+    if not root_node:     # Kung walang laman si root_node, edi ayun, error agad kasi wala tayong mapapakita
         messagebox.showerror("No Data", "Please load a file with valid numbers first.")
         return
+    
+    headers = ['Node', 'Parent', 'Sibling', 'Left', 'Right', 'Degree', 'Depth'] # Eto 'yung mga column titles — parang header ng Excel
+    table = tree.collect_nodes_info(root_node)  # Kukunin natin info ng lahat ng nodes — parang listahan ng tropa sa tree
 
-    headers = ['Node', 'Parent', 'Sibling', 'Left', 'Right', 'Degree', 'Depth']
-    table = tree.collect_nodes_info(root_node)
+    col_width = canvas.winfo_width() // len(headers)  # Divide natin ang lapad ng canvas para pantay-pantay ang column width
+    row_height = 30   # height ng bawat row 
+    start_y = 40   # Starting Y position — para hindi dikit sa taas     
 
-    col_width = canvas.winfo_width() // len(headers)
-    row_height = 30
-    start_y = 40
-
-    # Header row 
+    # Header row drawing 
     canvas.create_rectangle(0, start_y-30, canvas.winfo_width(), start_y, fill="#8e44ad")
+
+    # Lagay ng header text sa bawat column
     for i, header in enumerate(headers):
-        x = i * col_width
+        x = i * col_width 
         canvas.create_text(x + col_width//2, start_y - 15, text=header,
-                           font=("Segoe UI", 14, "bold"), fill="#f9e79f")  # creamy yellow text
+                           font=("Segoe UI", 14, "bold"), fill="#f9e79f")  
 
     # Line below header - ube purple
     canvas.create_line(0, start_y, canvas.winfo_width(), start_y, fill="#8e44ad", width=2)
 
     # Data rows 
     for r, row in enumerate(table):
-        bg_color = "#fcf3cf" if r % 2 == 0 else "#f9e79f"  # light and darker creamy yellow
+        bg_color = "#fcf3cf" if r % 2 == 0 else "#f9e79f"
+        
+        # Drawing ng row background — buong lapad para pantay
         canvas.create_rectangle(0, start_y + r*row_height, canvas.winfo_width(),
                                 start_y + (r+1)*row_height, fill=bg_color, outline="")
+
+        # Bawat cell sa row — lagyan natin ng value
         for c, val in enumerate(row):
-            x = c * col_width
+            x = c * col_width    
             y = start_y + (r + 0.5) * row_height
             canvas.create_text(x + col_width//2, y, text=val,
-                               font=("Segoe UI", 12), fill="#5b2c6f")  # dark purple text
+                               font=("Segoe UI", 12), fill="#5b2c6f")  
 
-    # Draw vertical grid lines
+    # Eto ‘yung vertical lines — para mukhang legit na table, hindi lang drawing-drawing
     for i in range(len(headers)+1):
         x = i * col_width
         canvas.create_line(x, start_y-30, x, start_y + row_height * len(table),
@@ -214,14 +220,14 @@ def display_tree():
         return
     display_tree_structure(canvas, root_node)  # External function to draw tree
 
-# Mouse hover effects para sa buttons
+# Mouse hover effects para sa buttons, para nagbabago kulay before iclick yung button
 def on_enter_btn(e):
-    e.widget['background'] = '#f7b733'   # Cheese accent yellow on hover
-    e.widget['foreground'] = '#6a4c93'   # Ube purple text on hover
+    e.widget['background'] = '#f7b733'   
+    e.widget['foreground'] = '#6a4c93'   
 
 def on_leave_btn(e):
-    e.widget['background'] = '#9f7aea'   # Lighter Ube purple normal bg
-    e.widget['foreground'] = 'white'     # White text normally
+    e.widget['background'] = '#9f7aea'   
+    e.widget['foreground'] = 'white'     
 
 
 # GUI
@@ -230,13 +236,13 @@ window = Tk()
 window.title("Puno ni sir Javier")
 window.geometry("950x950")      # Set window size
 window.configure(bg="#f3e9f9")  # background
-window.resizable(False, False)
+window.resizable(False, False)  # Para hindi resizable yung window
 
 # Title Frame
-title_frame = Frame(window, bg="#6a4c93", pady=15)  # Dark ube purple
+title_frame = Frame(window, bg="#6a4c93", pady=15)  
 title_frame.pack(fill=X)
 
-title_label = Label(title_frame, text="Binary Tree ", font=("Segoe UI", 24, "bold"), bg="#6a4c93", fg="#f6d365")  # Cheese yellow text
+title_label = Label(title_frame, text="Binary Tree ", font=("Segoe UI", 24, "bold"), bg="#6a4c93", fg="#f6d365")  
 title_label.pack()
 
 # File Selection Frame
