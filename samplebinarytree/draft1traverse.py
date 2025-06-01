@@ -32,23 +32,23 @@ class Tree:
     # Inorder Traversal (LDR)
     def traverse_inorder(self, root, result):
         if root:
-            self.traverse_inorder(root.left, result)
-            result.append(str(root.data))
-            self.traverse_inorder(root.right, result)
+            self.traverse_inorder(root.left, result) # Traverse sa left subtree
+            result.append(str(root.data))  # Kapag tapos na sa kaliwa, saka i-visit ang current node (kunin yung value)
+            self.traverse_inorder(root.right, result) # Traverse sa right subtree
 
     # Preorder Traversal (DLR)
     def traverse_preorder(self, root, result):
         if root:
-            result.append(str(root.data))
-            self.traverse_preorder(root.left, result)
-            self.traverse_preorder(root.right, result)
+            result.append(str(root.data)) # kunin agad value
+            self.traverse_preorder(root.left, result) # Traverse sa left subtree
+            self.traverse_preorder(root.right, result)  # Traverse sa right subtree
 
     # Postorder Traversal (LRD)
     def traverse_postorder(self, root, result):
         if root:
-            self.traverse_postorder(root.left, result)
-            self.traverse_postorder(root.right, result)
-            result.append(str(root.data))
+            self.traverse_postorder(root.left, result) # Traverse sa left subtree
+            self.traverse_postorder(root.right, result)  # Traverse sa right subtree
+            result.append(str(root.data)) # kunin value
 
     # Kinokolekta lahat ng node info: parent, sibling, left, right, degree, depth
     def collect_nodes_info(self, node, depth=0, nodes_info=None):
