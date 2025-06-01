@@ -180,7 +180,7 @@ def display_node_table():
     row_height = 30
     start_y = 40
 
-    # Header row - ube purple background
+    # Header row 
     canvas.create_rectangle(0, start_y-30, canvas.winfo_width(), start_y, fill="#8e44ad")
     for i, header in enumerate(headers):
         x = i * col_width
@@ -190,7 +190,7 @@ def display_node_table():
     # Line below header - ube purple
     canvas.create_line(0, start_y, canvas.winfo_width(), start_y, fill="#8e44ad", width=2)
 
-    # Data rows - alternating cheese yellows
+    # Data rows 
     for r, row in enumerate(table):
         bg_color = "#fcf3cf" if r % 2 == 0 else "#f9e79f"  # light and darker creamy yellow
         canvas.create_rectangle(0, start_y + r*row_height, canvas.winfo_width(),
@@ -201,7 +201,7 @@ def display_node_table():
             canvas.create_text(x + col_width//2, y, text=val,
                                font=("Segoe UI", 12), fill="#5b2c6f")  # dark purple text
 
-    # Draw vertical grid lines - ube purple
+    # Draw vertical grid lines
     for i in range(len(headers)+1):
         x = i * col_width
         canvas.create_line(x, start_y-30, x, start_y + row_height * len(table),
@@ -228,8 +228,8 @@ def on_leave_btn(e):
 
 window = Tk()
 window.title("Puno ni sir Javier")
-window.geometry("950x950")
-window.configure(bg="#f3e9f9")  # Very light ube-purple background
+window.geometry("950x950")      # Set window size
+window.configure(bg="#f3e9f9")  # background
 window.resizable(False, False)
 
 # Title Frame
@@ -251,37 +251,44 @@ file_entry.pack(side=LEFT, padx=10)
 
 browse_button = Button(file_frame, text="Browse", font=("Segoe UI", 12, "bold"), bg="#9f7aea", fg="white", relief=FLAT, padx=15, pady=7, cursor="hand2", command=browse_file)
 browse_button.pack(side=LEFT, padx=10)
-browse_button.bind("<Enter>", on_enter_btn)
-browse_button.bind("<Leave>", on_leave_btn)
+browse_button.bind("<Enter>", on_enter_btn) # Hover in
+browse_button.bind("<Leave>", on_leave_btn) # Hover out
 
 # Control Buttons Frame
 buttons_frame = Frame(window, bg="#f3e9f9", pady=10)
 buttons_frame.pack(fill=X, padx=20)
 
+# Load File button 
 load_button = Button(buttons_frame, text="Load File", font=("Segoe UI", 14, "bold"), bg="#9f7aea", fg="white", relief=FLAT, padx=20, pady=10, cursor="hand2", command=load_file)
 load_button.pack(side=LEFT, padx=10)
 load_button.bind("<Enter>", on_enter_btn)
 load_button.bind("<Leave>", on_leave_btn)
 
+
+# Button to show Pre, In, Post traversals
 draw_button = Button(buttons_frame, text="Display Traversals", font=("Segoe UI", 14, "bold"), bg="#9f7aea", fg="white", relief=FLAT, padx=20, pady=10, cursor="hand2", command=traverse_display)
 draw_button.pack(side=LEFT, padx=10)
 draw_button.bind("<Enter>", on_enter_btn)
 draw_button.bind("<Leave>", on_leave_btn)
 
+# Button to show Node Table (Node, Parent, etc.)
 table_button = Button(buttons_frame, text="Display Node Table", font=("Segoe UI", 14, "bold"), bg="#9f7aea", fg="white", relief=FLAT, padx=20, pady=10, cursor="hand2", command=display_node_table)
 table_button.pack(side=LEFT, padx=10)
 table_button.bind("<Enter>", on_enter_btn)
 table_button.bind("<Leave>", on_leave_btn)
 
+# Button to show tree structure graphically
 tree_button = Button(buttons_frame, text="Display Tree Structure", font=("Segoe UI", 14, "bold"), bg="#9f7aea", fg="white", relief=FLAT, padx=20, pady=10, cursor="hand2", command=display_tree)
 tree_button.pack(side=LEFT, padx=10)
 tree_button.bind("<Enter>", on_enter_btn)
 tree_button.bind("<Leave>", on_leave_btn)
 
-
+# Canvas frame for outputs
 canvas_frame = Frame(window, bg="#d6cdea", padx=5, pady=5)  # Soft light purple bg for canvas frame
 canvas_frame.pack(padx=20, pady=20, fill=BOTH, expand=True)
 
+
+# Canvas itself (drawing area)
 canvas = Canvas(canvas_frame, width=900, height=720, bg="white", highlightthickness=0)
 canvas.pack()
 
