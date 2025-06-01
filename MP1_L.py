@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import font
-yes = { #diz is the priority of each operators
+yes = { #first ay dito yung mga priority ng each operators dito sa loob ng dictionary
     '||': 1, '&&': 2, '!': 3,
     '==': 4, '!=': 4, '<': 5, '>': 5, '<=': 5, '>=': 5,
     '+': 6, '-': 6,
     '*': 7, '/': 7, '%': 7,
-    '^': 8
-} 
+    '^': 8}
+ 
 def is_operator(token): #so basically chinecheck nya lang if yung operator is nasa dictionary which is yung "yes" dict
     return token in yes
 def apply_operator(op, a, b=None): #function na tumatanggap ng specific operators, a yung first operand and b yung second para hiwalay ung logic ng application, masmalinis
@@ -61,10 +61,10 @@ def infix_to_postfix(expr): #eto naman yung function na mag coconvert from infix
         elif token == '(': #pag left parenthesis mag pupush yan sa stack, lahat ng operators after nito ma eevaluate seperately before the closing parenthesis
             stack.append(token)
         elif token == ')': #pag right parenthesis naman po ipopop nya na yung operators from the stack tas i aadd na yun sa output hanggang mahanap yung closing
-            found_paren = False
-            while stack:
-                top = stack.pop()
-                if top == '(':
+            found_paren = False #assume muna tayo na hindi pa nakikitang
+            while stack: #mag loloop lang habang may laman pa yung stack
+                top = stack.pop() #pop sa stack
+                if top == '(': #basta pag may nakitang ')' si loop parang ganito yan "Tangina balik may closing parenthesis pala hanapin natin yung opening non"
                     found_paren = True
                     break
                 output.append(top)
