@@ -160,7 +160,7 @@ def traverse_display():
 
     # Display results ng traversals with ube cheese colors
     canvas.create_text(20, 40, anchor="w", text="Preorder:  " + ' '.join(pre),
-                       font=("Segoe UI", 14, "bold"), fill="#5b2c6f")  # dark purple text
+                       font=("Segoe UI", 14, "bold"), fill="#5b2c6f")  
     canvas.create_text(20, 80, anchor="w", text="Inorder:   " + ' '.join(ino),
                        font=("Segoe UI", 14, "bold"), fill="#5b2c6f")
     canvas.create_text(20, 120, anchor="w", text="Postorder: " + ' '.join(post),
@@ -189,7 +189,7 @@ def display_node_table():
         canvas.create_text(x + col_width//2, start_y - 15, text=header,
                            font=("Segoe UI", 14, "bold"), fill="#f9e79f")  
 
-    # Line below header - ube purple
+    # Line below header
     canvas.create_line(0, start_y, canvas.winfo_width(), start_y, fill="#8e44ad", width=2)
 
     # Data rows 
