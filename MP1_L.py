@@ -36,6 +36,8 @@ def tokenize(expr): #eto naman ginagawa nyang token yung each character in an ex
     while i < len(expr): #tas eto naman yung loop na nag ruruun from left to right char by char
         if expr[i].isdigit(): #base don sa scanner pag na scan nya yung character as digit ilalagay nya sa loob ng "" ex. num = "123"
             num += expr[i]
+        # elif expr == '-'and (i == 0 or expr[i-0]) in '(*/+-%^<>=!&|':
+        #     num+=expr
         else:           # so eto naman is pag hindi na digit yung nababasa nya meaning tapos na yung current number at mag aappend na to sa  tokens = [] at mag rereset na ulet for the next one
             if num:
                 tokens.append(num)
@@ -107,19 +109,66 @@ def evaluate_postfix(postfix):  #so dito mag dedefine tayo ng function na nageev
 root = tk.Tk()
 root.title("MP1 - INFIX TO POSTFIX CALCULATOR")
 root.geometry("700x400")
-root.configure(bg="#f0f4f8")
-title_font = font.Font(family="Helvetica", size=18, weight="bold")
+root.configure(bg="#a259ff")  # brighter ube
+
+title_font =font.Font(family="Helvetica", size=18, weight="bold")
 label_font = font.Font(family="Helvetica", size=12)
 entry_font = font.Font(family="Courier", size=14)
-title_label = tk.Label(root, text="Infix to Postfix Stack Calculator - MP1 ", font=title_font, bg="#f0f4f8", fg="#333")
+
+title_label = tk.Label(
+    root, 
+    text="Infix to Postfix Stack Calculator - MP1", 
+    font=title_font, 
+    bg="#a259ff", 
+    fg="#ffffff"  
+)
 title_label.pack(pady=20)
-entry = tk.Entry(root, font=entry_font, width=50, justify="center", bd=3, relief="groove")
+
+entry = tk.Entry(
+    root, 
+    font=entry_font, 
+    width=50, 
+    justify="center", 
+    bd=3, 
+    relief="groove", 
+    bg="#ffffff", 
+    fg="#000000"
+)
 entry.pack(pady=10)
-calc_button = tk.Button(root, text="Evaluate Expression", font=label_font, bg="#0066ff", fg="white", padx=15, pady=5, command=lambda: calculate())
+
+calc_button = tk.Button(
+    root, 
+    text="Evaluate Expression", 
+    font=label_font, 
+    bg="#fff94f",  
+    fg="#000000", 
+    padx=15, 
+    pady=5, 
+    command=lambda: calculate()
+)
 calc_button.pack(pady=10)
-postfix_label = tk.Label(root, text="Postfix:", font=label_font, bg="#f0f4f8", fg="#555")
+
+postfix_label = tk.Label(
+    root, 
+    text="Postfix:", 
+    font=label_font, 
+    bg="#a259ff", 
+    fg="#ffffff"
+)
 postfix_label.pack(pady=5)
-result_label = tk.Label(root, text="Result:", font=label_font, bg="#43d14f", fg="#000", relief="groove", padx=10, pady=5, width=60, anchor="center")
+
+result_label = tk.Label(
+    root, 
+    text="Result:", 
+    font=label_font, 
+    bg="#fff94f", 
+    fg="#000000", 
+    relief="groove", 
+    padx=10, 
+    pady=5, 
+    width=60, 
+    anchor="center"
+)
 result_label.pack(pady=10)
 def calculate(): #this where the magic starts
     expr = entry.get().strip() #eto yung kukuha ng input galnig don sa entry field sa gui, yung .strip yung mag aalis ng extra spaces sa start or sa dulo para malinis bago i process
