@@ -93,8 +93,8 @@ def evaluate_postfix(postfix):  #so dito mag dedefine tayo ng function na nageev
                 raise ValueError("missing operand for !")
             a = stack.pop()
             stack.append(apply_operator(token, a))
-        else:  #eto naman chinecheck nya if sapat na yung operand para sa current operator like +,+,/, kasi ito need atleast 2 operands unlike ! na isa lang sapat na
-            if len(stack) < 2:
+        else:  #eto naman chinecheck nya if sapat na yung operand para sa current operator like +,*,/, kasi ito need atleast 2 operands unlike ! na isa lang sapat na
+            if len(stack) < 2: 
                 raise ValueError(f"not enough operands for '{token}'") #error if kulang yung operand
             b = stack.pop() #una i push si b sa top
             a = stack.pop()# then si a second top
@@ -109,7 +109,7 @@ def evaluate_postfix(postfix):  #so dito mag dedefine tayo ng function na nageev
 root = tk.Tk()
 root.title("MP1 - INFIX TO POSTFIX CALCULATOR")
 root.geometry("700x400")
-root.configure(bg="#a259ff")  # brighter ube
+root.configure(bg="#a259ff")
 
 title_font =font.Font(family="Helvetica", size=18, weight="bold")
 label_font = font.Font(family="Helvetica", size=12)
@@ -186,5 +186,5 @@ def calculate(): #this where the magic starts
     except Exception as e: #mag didisplay sya ng error sa gui pag may ano mang mali sa ginawa ng user para hindi quit bigla, dat may feedback
         postfix_label.config(text="Postfix: Error")
         result_label.config(text=f"Error: {e}")
-root.bind('<Return>', lambda event: calculate())
+root.bind('<Return>', lambda event: calculate()) #para lang mag enter sya using yung enter key kahit di na sya i click gamit yung mouse
 root.mainloop() #nagrurun sa gui para nakaopen lang sya habang ginagamit
