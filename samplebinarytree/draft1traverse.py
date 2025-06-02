@@ -142,7 +142,7 @@ def load_file():
                 root_node = tree.insert(root_node, num)
             messagebox.showinfo("Success", f"Loaded: {', '.join(map(str, number_list))}")
         else:
-            messagebox.showerror("Invalid Format", "Each number must be on a separate line. No commas or spaces.")
+            messagebox.showerror("Invalid Format", "Each number must be on a separate line. No commas or spaces, must be only numbers.")
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
